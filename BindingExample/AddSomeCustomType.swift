@@ -49,10 +49,29 @@ struct AddSomeCustomType: View {
                 
             }
             .navigationTitle("Add New Item")
-    
+            .toolbar {
+                ToolbarItem(placement: .primaryAction) {
+                    Button("Save") {
+                        saveItem()
+                    }
+                }
+            }
         }
-        
     }
+    
+    func saveItem() {
+        
+        // Append the new item to the array of items that is bound to the source of truth – the array of items – from the main content view
+        items.append(SomeCustomType(name: name,
+                                    description: description,
+                                    flag: flag,
+                                    rating: rating))
+        
+        // Toggle the boolean that controls whether this sheet is showing, so it will be dismissed
+        presentingAddItemSheet = false
+
+    }
+    
 }
 
 struct AddSomeCustomType_Previews: PreviewProvider {
