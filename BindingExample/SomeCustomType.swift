@@ -8,7 +8,8 @@
 import Foundation
 
 // When a type conforms to the Identifiable protocol (includes an id attribute) we can then use the type in List views more easily
-struct SomeCustomType: Identifiable {
+// When a type conforms to Codable, it can be encoded to and decoded from JSON
+struct SomeCustomType: Identifiable, Codable {
     
     var id = UUID() // A UUID is a universally unique identifier the system will generate for us
     var name: String

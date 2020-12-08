@@ -9,8 +9,8 @@ import SwiftUI
 
 struct AddSomeCustomType: View {
     
-    // NOTE: Refer to diagram at https://swiftuipropertywrappers.com for reminder on what property wrapper to use. Some SomeCustomType is a struct (a value type) we use an @Binding property wrapper here.
-    @Binding var items: [SomeCustomType]
+    // NOTE: Refer to diagram at https://swiftuipropertywrappers.com for reminder on what property wrapper to use. Some SomeCustomTypeContainer is a class (a reference type) we use an @ObservedObject property wrapper here.
+    @ObservedObject var customTypeContainer: SomeCustomTypeContainer
     
     // Controls whether this sheet is visible or not
     @Binding var presentingAddItemSheet: Bool
@@ -62,14 +62,14 @@ struct AddSomeCustomType: View {
     func saveItem() {
         
         // Append the new item to the array of items that is bound to the source of truth – the array of items – from the main content view
-        items.append(SomeCustomType(name: name,
-                                    description: description,
-                                    flag: flag,
-                                    rating: rating))
+        customTypeContainer.items.append(SomeCustomType(name: name,
+                                                        description: description,
+                                                        flag: flag,
+                                                        rating: rating))
         
         // Toggle the boolean that controls whether this sheet is showing, so it will be dismissed
         presentingAddItemSheet = false
-
+        
     }
     
 }
@@ -77,7 +77,7 @@ struct AddSomeCustomType: View {
 struct AddSomeCustomType_Previews: PreviewProvider {
     
     static var previews: some View {
-        AddSomeCustomType(items: .constant(testData),
+        AddSomeCustomType(customTypeContainer: SomeCustomTypeContainer(),
                           presentingAddItemSheet: .constant(true))
     }
     

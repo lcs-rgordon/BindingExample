@@ -10,17 +10,17 @@ import SwiftUI
 struct ContentView: View {
     
     // The list of items we are tracking with this app
-    @State private var items: [SomeCustomType] = testData
+    @StateObject private var customTypeContainer = SomeCustomTypeContainer()
     
     // Whether the add item sheet is being presented
     @State private var presentingAddItemSheet = false
-
+    
     var body: some View {
         
         NavigationView {
             
             // Show a basic list of the items
-            List(items) { currentItem in
+            List(customTypeContainer.items) { currentItem in
                 
                 NavigationLink(currentItem.name,
                                destination: SomeCustomTypeDetail(item: currentItem))
@@ -28,7 +28,7 @@ struct ContentView: View {
             }
             .navigationTitle("Item Manager")
             .sheet(isPresented: $presentingAddItemSheet, content: {
-                AddSomeCustomType(items: $items,
+                AddSomeCustomType(customTypeContainer: customTypeContainer,
                                   presentingAddItemSheet: $presentingAddItemSheet)
             })
             .toolbar {
@@ -39,6 +39,13 @@ struct ContentView: View {
                     }
                 }
             }
+            .onReceive(NotificationCenter.default.publisher(for: UIApplication.willResignActiveNotification)) { _ in
+                
+                // Save any items that have been completed
+                // This view modifier is triggered whenever the app is quit or moved to the background on the device
+                customTypeContainer.save()
+            }
+            
             
         }
         
