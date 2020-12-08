@@ -11,6 +11,9 @@ struct ContentView: View {
     
     // The list of items we are tracking with this app
     @State private var items: [SomeCustomType] = testData
+    
+    // Whether the add item sheet is being presented
+    @State private var presentingAddItemSheet = false
 
     var body: some View {
         
@@ -21,6 +24,18 @@ struct ContentView: View {
                 Text(item.name)
             }
             .navigationTitle("Item Manager")
+            .sheet(isPresented: $presentingAddItemSheet, content: {
+                AddSomeCustomType(items: $items,
+                                  presentingAddItemSheet: $presentingAddItemSheet)
+            })
+            .toolbar {
+                ToolbarItem(placement: .primaryAction) {
+                    Button("Add") {
+                        // Toggle the boolean to show the "add item" sheet
+                        presentingAddItemSheet = true
+                    }
+                }
+            }
             
         }
         
