@@ -22,8 +22,13 @@ struct ContentView: View {
             // Show a basic list of the items
             List(customTypeContainer.items) { currentItem in
                 
-                NavigationLink(currentItem.name,
-                               destination: SomeCustomTypeDetail(item: currentItem))
+                HStack {
+                    Image(systemName: currentItem.flag ? "checkmark.circle.fill" : "circle")
+                        .resizable()
+                        .frame(width: 20, height: 20) // (12)
+                    NavigationLink(currentItem.name,
+                                   destination: SomeCustomTypeDetail(item: currentItem))
+                }
                 
             }
             .navigationTitle("Item Manager")
