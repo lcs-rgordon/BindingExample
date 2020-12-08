@@ -8,9 +8,22 @@
 import SwiftUI
 
 struct ContentView: View {
+    
+    // The list of items we are tracking with this app
+    @State private var items: [SomeCustomType] = testData
+
     var body: some View {
-        Text("Hello, world!")
-            .padding()
+        
+        NavigationView {
+            
+            // Show a basic list of the items
+            List(items) { item in
+                Text(item.name)
+            }
+            .navigationTitle("Item Manager")
+            
+        }
+        
     }
 }
 
