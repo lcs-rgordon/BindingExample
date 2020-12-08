@@ -20,8 +20,11 @@ struct ContentView: View {
         NavigationView {
             
             // Show a basic list of the items
-            List(items) { item in
-                Text(item.name)
+            List(items) { currentItem in
+                
+                NavigationLink(currentItem.name,
+                               destination: SomeCustomTypeDetail(item: currentItem))
+                
             }
             .navigationTitle("Item Manager")
             .sheet(isPresented: $presentingAddItemSheet, content: {

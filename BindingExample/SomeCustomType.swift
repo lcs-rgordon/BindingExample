@@ -20,7 +20,7 @@ struct SomeCustomType: Identifiable {
 
 // Define some test data to use at various points during development
 let testData = [
-    SomeCustomType(name: "Apples", description: "A delicious fruit with many varieties.", flag: false, rating: 8),
-    SomeCustomType(name: "Bananas", description: "Of tropical origin; comes with a convenient wrapper.", flag: true, rating: 7),
-    SomeCustomType(name: "Cherries", description: "Great on cheesecake.", flag: true, rating: 9),
+    SomeCustomType(name: "Apples", description: "A delicious fruit with many varieties. Best fresh in the fall; can get mushy if stored over the winter and consumed in the spring.", flag: false, rating: 8),
+    SomeCustomType(name: "Bananas", description: "Of tropical origin; comes with a convenient wrapper. Can be tricky to determine when it is ready to eat, however.", flag: true, rating: 7),
+    SomeCustomType(name: "Cherries", description: "Great on cheesecake, this is a fruit with a deep red colour. Watch out for pits!", flag: true, rating: 9),
 ]
